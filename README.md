@@ -1,206 +1,85 @@
-# Kérdőívek
+# Survey
 
-_Kliensoldali webprogramozás 2. beadandó_
+This web application is used to make, delete and modify surveys, and also to fill out them.
 
-## Nyilatkozat
+## Sites
 
-Kérlek, töltsétek ki az adataitokkal beadás előtt!
+### Main page (Survey)
 
-<Hallgató Földes Dániel>
-<Neptun TUC2P1>
-Kliensoldali webprogramozás - beadandó
-Ezt a megoldást a fent írt hallgató küldte be és készítette a Kliensoldali webprogramozás kurzus számonkéréséhez.
-Kijelentem, hogy ez a megoldás a saját munkám. Nem másoltam vagy használtam harmadik féltől
-származó megoldásokat. Nem továbbítottam megoldást hallgatótársaimnak, és nem is tettem közzé.
-Az Eötvös Loránd Tudományegyetem Hallgatói Követelményrendszere
-(ELTE szervezeti és működési szabályzata, II. Kötet, 74/C. §) kimondja, hogy mindaddig,
-amíg egy hallgató egy másik hallgató munkáját - vagy legalábbis annak jelentős részét -
-saját munkájaként mutatja be, az fegyelmi vétségnek számít.
-A fegyelmi vétség legsúlyosabb következménye a hallgató elbocsátása az egyetemről.
+Includes static text.
 
-## A feladat
+### Registration
 
-A beadandóban olyan webes alkalmazást kell írnod, amelyben egy felhasználónak lehetősége van többlépéses kérdőíveket összeállítania. Az elkészített kérdőíveket egy táblázatban át lehet tekinteni, ahol lehetőség van ezek módosítására, törlésére, valamint azok megosztására egy linken keresztül. Ezen a linken keresztül aztán a kérdőívet ki lehet tölteni. A kérdőívekhez tartozó válaszokat ezt követően egy külön felületen meg lehet tekinteni.
+The following data is required:
 
-A feladatot _React_ és _Redux_ kombinációjával kell megoldanod, Redux esetében ajánlott a _redux toolkit_ és akár az _RTK Query_ használata. Mivel az alkalmazás több oldalból áll, a _react-router_ használata javasolt.
-A feladatban adott a szerveroldali REST API, leírását lentebb olvashatjátok, ehhez kell igazodnia a kliensnek.
+- name (required)
+- email (required)
+- password (required)
 
-## Oldalak
+### Login
 
-### Navigáció
+The following data is required:
 
-Minden oldal tetején megjelenik egy navigációs sáv, ahol az alkalmazás neve és az elérhető funkciók vannak menüpontokban megjelenítve:
+- email (required)
+- password (required)
 
-- Kérdőívek (ez az alkalmazás neve, rákattintva főoldalra visz)
-- Ha nincs bejelentkezve
-  - Regisztráció
-  - Bejelentkezés
-- Bejelentkezve
-  - Kérdőíveim
-  - Válaszok
-  - Profil
-  - Kijelentkezés
+### New survey
 
-### Főoldal
+You have to be logged in.
+You have to make surveys in a "code" format (write on the textarea):
 
-Statikus információkat tartalmazó oldal, az alkalmazás címével és egy rövid leírással.
+- the first row is the title
+- every page starts with a new line
+- every page's first row contains it's name, and below are the questions
 
-### Regisztráció
-
-Az alábbi adatok megadása szükséges:
-
-- teljes név (kötelező)
-- email cím (email, kötelező)
-- jelszó (kötelező)
-
-Validáció elegendő HTML5 attribútumokkal!
-
-### Bejelentkezés
-
-Az alábbi kötelező adatokkal történik:
-
-- email (email. kötelező)
-- jelszó (kötelező)
-
-Validáció elegendő HTML5 attribútumokkal!
-
-### Új kérdőív
-
-Csak bejelentkezve érhető el.
-Egy darab textarea-t tartalmaz, amin keresztül újabb kérdőívet készíthetünk.
-A kérdőív egy "kód" formájában készül, aminek szabályai a következőek:
-
-- első sor tartalmazza a kérdőív megnevezését
-- minden kérdőíven belüli lap egy üres sorral kezdődik
-- a lapok első sora tartalmazza annak a megnevezését, majd alatta külön sorokban az egyes kérdések
-
-A bevitt adatot ellenőrizni kell. A formátum ellenőrzésekor elég a következőket figyelni:
-
-- nem üres,
-- van címe,
-- legalább 1 lapja,
-- laponként legalább 1 kérdéssel.
-
-A kérdések minden esetben egyszerű szöveges választ várnak.
+Every question can be answere with a simple text answer (text input is enough).
 
 A kérdőív mentésekor a REST API automatikusan a bejelentezettt felhasználóhoz rendeli a kérdőívet, generál neki egy egyedi azonosítót (`hash`), amit majd a hivatkozáshoz lehet használni.
 
-![Válaszok](./images/new.png)
+After saving the survey, the REST API automatically append the survey to the currently logged in user and generates an unique id ('hash'), which can be used later to access the survey.
 
-### Kérdőíveim
+### My surveys
 
-Csak bejelentkezve érhető el.
-A bejelentkezett felhasználóhoz tartozó kérdőívek jelennek itt meg, minden feladatsornál azok nevei, létrehozási dátumai és a hozzá tartozó funkciógombok. A nevek linkek, amik a kérdőívhez tartozó linkre (`hash`) mutatnak (ezen keresztül van lehetőség annak kitöltésére). Minden kérdőívnél lehetőség van:
+You have to be logged in.
+You can see your surveys on this page, and make modifications like:
 
-- annak törlésére,
-- módosítására (az "Új kérdőív" felületen jelenik meg a jelenlegi kérdőív "kódja"),
-- hozzá tartozó link vágólapra másolására,
-- valamint a hozzá tartozó válaszok megtekintésére.
+- delete,
+- modify,
+- copy link to access the survey,
+- to see it's answers.
 
-![Válaszok](./images/list.png)
+### Survey
 
-### Kérdőív
+You can fill out any existing survey, but you have to login first!
 
-Az előző részben tárgyalt hivatkozás ismeretében bárki elérheti. Pl. `http://localhost:3000/survey/<hash>`.
+### Answers
 
-A kérdőív különböző lépésekként jeleníti meg az egyes lapokon található kérdéseket. A következő lapra csak abban az esetben léphetünk, ha a felhasználó már minden aktuális mezőt kitöltött. Navigálni az előre-hátra gombokkal, illetve a lapok neveire kattintva lehet. Lapra csak akkor lehet lépni, ha már ki van töltve, vagy éppen az az aktuális.
+You have to be logged in.
+You can choose from the survey list and check it's answers.
 
-A legvégén a beküldés gomb hatására a válaszokat felküldjük. Csak úgy küldhető be a kérdőív, ha minden adat ki van töltve.
+### Profile
 
-![Válaszok](./images/query.png)
+You have to be logged in.
+User's data will be displayed:
 
-### Válaszok
-
-Csak bejelentkezve érhető el.
-A "Kérdőíveim" oldalon kiválasztott kérdőív válaszai tekinthetőek itt meg listaszerűen. Megjelenik a kérdőív címe, a kérdések és a kérdések alatt a kitöltők által adott válaszok.
-
-![Válaszok](./images/answers.png)
-
-### Profil
-
-Csak bejelentkezve érhető el.
-A bejelentkezett felhasználó adatai jelennek meg.
-
-- Név
+- Name
 - Email
-- Kérdőívek száma
-- Kijelentkezés gomb
-
-## A kliens
-
-Az alkalmazást a `client` mappában kell elkészíteni. A mappa egyelőre egy teljesen friss Vite telepítést tartalmaz, a szükséges további függőségeket Nektek kell hozzáadni. A nem szükséges dolgokat viszont nyugodtan ki is törölheted!
-
-```
-cd client
-npm install
-npm run dev
-```
+- Number of the surveys
 
 ## REST API
 
-A szerver forráskódja a `rest-api` mappában található. Telepíteni és indítani kell lokálisan:
-
-```
-cd rest-api
-npm install
-npm start
-```
-
-Három szolgáltatás van kivezetve:
+Három three services will be running:
 
 - `users`
 - `surveys`
 - `results`
 
-A végpontok leírását és kipróbálását úgy tehetitek meg legegyszerűbben, ha az alábbi Postman gyűjteményeket importáljátok a Postman REST API kliensbe. Ez egy webes alkalmazás, a Postman Agentet lokálisan telepíteni kell, majd a megnyíló alkalmazásban egy új Workspace-t kell létrehozni, és fent megnyomni az "Import" gombot, és egyesével linkként beilleszteni őket:
+You can try them out with POSTMAN (or other app if you would like):
 
 - [auth gyűjtemény](https://api.postman.com/collections/15151253-4cf57ab5-49d7-4350-af18-9e3c7b29626a?access_key=PMAT-01H0JMHKRYB30J9BFQAMQ2PDR2)
 - [surveys gyűjtemény](https://api.postman.com/collections/15151253-faa17ed9-b3d4-4e85-b681-52fe8dbfde37?access_key=PMAT-01H0JMK0RGT8BH9CQY6CGF8ZW6)
 - [results gyűjtemény](https://api.postman.com/collections/15151253-b3e753b2-42d0-4946-b312-999bb75002d4?access_key=PMAT-01H0JMKX3741T69NKZXD9ABX6Z)
 
-Innentől kipróbálhatók a végpontok. A felküldendő tartalmak a Body részben vannak előkészítve.
+## Database
 
-A `surveys` és `results` végpontok eléréséhez hitelesítés szükséges. Ehhez egy `Authorization` HTTP fejlécet kell küldeni `Bearer token` tartalommal. A tokent a login végpont adja vissza. Az authentikációhoz tartozó JWT token a `surveys` és `results` gyűjtemény `Authorization` fülén van elmentve, ott igény szerint cserélhető. Az itt megadott token is használható próbaképpen, de az alkalmazásban dinamikusan kell generáltatni.
-
-## Adatbázis
-
-A mentett adatok egy lokális SQLite táblában jelennek meg: `rest-api.sqlite`. Ezt pl. a [DB Browser for SQLite](https://sqlitebrowser.org/) programmal tudunk megnézni, módosítani.
-
-## További információk
-
-Elvárás az igényes megjelenés. Ehhez használhatsz saját CSS-t is, de komponens függvénykönyvárakat is, mint pl. [Material UI](https://mui.com/) vagy [Bootstrap](https://react-bootstrap.github.io/).
-
-## Feltöltendő
-
-Az egész projektet tömörítsd be, kliensestül, szerverestül, és azt töltsd föl. **Beadás (tömörítés) előtt a `node_modules` mappákat mindenképpen töröld!**
-
-## Pontozás
-
-Összesen 30 pont érhető el.
-
-- React használata (kötelező)
-- Redux használata (kötelező)
-- Navigáció megfelelően változik a be- és kijelentkezésnek megfelelően (1pt)
-- Főoldal megjelenik (1pt)
-- Regisztráció működik (1pt)
-- Bejelentkezés működik (1pt)
-- Új kérdőív, Kérdőíveim: csak bejelentkezve érhetőek el (1pt)
-- Új kérdőív: új kérdőív mentésének helyes működése (2pt)
-- Kérdőíveim: megjelennek a kérdőívek az elérhető funkciókkal (2pt)
-- Kérdőíveim: módosítás helyes működése (2pt)
-- Kérdőíveim: törlés helyes működése (2pt)
-- Kérdőíveim: hivatkozás helyes működése (1pt)
-- Kérdőív: a kérdőív kérdései megjelennek (3pt)
-- Kérdőív: a kérdések lapozható formában jelennek meg a lapok megnevezéseivel, a lapok közötti navigáció megfelelő (2pt)
-- Kérdőív: csak kitöltött oldal esetén lehet továbblapozni (1pt)
-- Kérdőív: lapozón vizuálisan látszik, hogy mely lapnál tartunk (1pt)
-- Kérdőív: beküldés helyes működése (2pt)
-- Válaszok: a kiválasztott kérdőívre adott válaszok megjelennek (2pt)
-- Profil: csak bejelentkezve érhető el, megfelelő tartalommal (2pt)
-- Profil: Kijelentkezés gomb működik (1pt)
-- Igényes megjelenés (2pt)
-- Pluszok: a kérdőíveim lista lapozható (pl. 5-ösével) (+2pt)
-- Pluszok: a válaszok lista lapozható (pl. 10-esével) (+2pt)
-- Pluszok: a kérdőív linkje egy gombra kattintva a vágólapra másolható (+1pt)
-- 1 hét késés (-3pt)
-- 2 hét késés (-6pt)
+Saved data is stored in `rest-api.sqlite` file.
