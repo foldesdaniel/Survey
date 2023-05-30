@@ -18,6 +18,8 @@ function Register() {
   const handleSubmit = async (e) => {
     setSuccess(false);
 
+    if (name === "" || email === "" || password === "") return;
+
     e.preventDefault();
     try {
       await registerUser({
