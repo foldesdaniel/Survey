@@ -34,9 +34,7 @@ You have to make surveys in a "code" format (write on the textarea):
 
 Every question can be answere with a simple text answer (text input is enough).
 
-A kérdőív mentésekor a REST API automatikusan a bejelentezettt felhasználóhoz rendeli a kérdőívet, generál neki egy egyedi azonosítót (`hash`), amit majd a hivatkozáshoz lehet használni.
-
-After saving the survey, the REST API automatically append the survey to the currently logged in user and generates an unique id ('hash'), which can be used later to access the survey.
+After saving the survey, the REST API automatically append the survey to the currently logged in user and generates an unique id (`hash`), which can be used later to access the survey.
 
 ### My surveys
 
