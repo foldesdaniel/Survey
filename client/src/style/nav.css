@@ -1,0 +1,21 @@
+.nav-row {
+  background-color: rgb(7, 174, 224);
+  color: white;
+  box-shadow: 0 4px 2px -2px gray;
+}
+
+.nav-col {
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 12px;
+}
+
+.active {
+  color: black;
+  font-weight: bold;
+}
+
+.navlink {
+  text-decoration: none;
+  color: white;
+}

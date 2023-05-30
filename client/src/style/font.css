@@ -1,0 +1,19 @@
+.nav-link {
+  font-size: 1.1rem;
+  vertical-align: middle;
+  transition: color 0.4s;
+}
+
+.nav-link:hover {
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+}
+
+.big {
+  font-size: 2.1rem;
+}
+
+.heading {
+  margin-bottom: 60px;
+  margin-top: 40px;
+}

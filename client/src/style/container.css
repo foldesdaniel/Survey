@@ -1,0 +1,34 @@
+.container {
+  max-width: 100%;
+}
+
+.outer-answer {
+  border: 1px solid rgb(206, 204, 204);
+  border-radius: 1px;
+  padding: 10px;
+  text-align: left;
+  margin-bottom: -1px;
+}
+
+.inner-answer {
+  border: 1px solid rgb(206, 204, 204);
+  border-radius: 1px;
+  text-align: left;
+  margin-bottom: -1px;
+
+  display: table;
+  width: 100%;
+  height: 60px;
+  padding-left: 20px;
+}
+
+.inner-answer p {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left !important;
+}
+
+.outer-answer p {
+  margin-left: 15px;
+  font-size: 1.3rem;
+}

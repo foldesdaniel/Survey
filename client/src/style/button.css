@@ -1,0 +1,35 @@
+.register-button {
+  width: 110px;
+}
+
+.survey-btn:hover {
+  cursor: pointer;
+}
+
+.activeSend {
+  background-color: rgb(55, 246, 16) !important;
+  border-color: rgb(55, 246, 16) !important;
+}
+
+.unfilled {
+  background-color: rgb(198, 196, 196) !important;
+  border-color: rgb(198, 196, 196) !important;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.green {
+  background-color: rgb(38, 132, 37) !important;
+  border-color: rgb(38, 132, 37) !important;
+}
+
+.send {
+  background-color: rgb(62, 198, 9) !important;
+  border-color: rgb(62, 198, 9) !important;
+}

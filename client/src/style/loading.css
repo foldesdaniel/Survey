@@ -1,0 +1,9 @@
+.loading {
+  text-align: center;
+  font-size: 3rem;
+  margin-top: 50px;
+}
+
+.error {
+  color: red !important;
+}

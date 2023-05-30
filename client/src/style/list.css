@@ -1,0 +1,9 @@
+.li-item {
+  transition: 0.2s;
+}
+
+.li-item:hover {
+  cursor: pointer;
+  background-color: rgb(7, 174, 224);
+  color: white;
+}
